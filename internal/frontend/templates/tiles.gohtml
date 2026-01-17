@@ -1,0 +1,19 @@
+{{range .Instances}}
+<div class="tile" style="border-left: 6px solid {{.HostnameColor}}; border-right: 6px solid {{.Color}};">
+    <h3><span style="color: {{.HostnameColor}};">{{.Info.Hostname}}</span><span style="color: {{.Color}}; float: right;">{{.Info.Version}}</span></h3>
+    <div class="tile-info">
+        <div class="info-row">
+            <span class="info-label">Uptime:</span>
+            <span class="info-value">{{.Info.Uptime}}</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Go Version:</span>
+            <span class="info-value">{{.Info.GoVersion}}</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Timestamp:</span>
+            <span class="info-value">{{.Info.Timestamp}}</span>
+        </div>
+    </div>
+</div>
+{{end}}

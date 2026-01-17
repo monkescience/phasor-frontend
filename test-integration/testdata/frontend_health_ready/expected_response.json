@@ -1,0 +1,11 @@
+{
+  "status": "ok",
+  "checks": [
+    {
+      "name": "backend",
+      "status": "ok",
+      "duration": "{{anyString}}"
+    }
+  ],
+  "environment": "test"
+}
