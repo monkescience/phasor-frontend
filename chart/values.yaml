@@ -1,0 +1,49 @@
+replicaCount: 2
+
+image:
+  repository: ghcr.io/monkescience/phasor-frontend
+  pullPolicy: IfNotPresent
+  tag: ""
+
+serviceAccount:
+  create: true
+  name: ""
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8081
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    memory: 128Mi
+
+config:
+  environment: production
+  logLevel: info
+  logFormat: json
+  backendURL: "http://phasor-backend:80/instance/info"
+  tileColors:
+    - "#667eea"
+    - "#f093fb"
+    - "#4facfe"
+    - "#43e97b"
+    - "#fa709a"
+    - "#feca57"
+    - "#ff6348"
+    - "#1dd1a1"
+
+rollout:
+  enabled: true
+  steps:
+    - setWeight: 20
+    - pause: { duration: 30s }
+    - setWeight: 50
+    - pause: { duration: 30s }
+    - setWeight: 100
+  smokeTest:
+    enabled: true
+    replicas: 1

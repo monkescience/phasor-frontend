@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "phasor-frontend.fullname" . }}
+  labels:
+    {{- include "phasor-frontend.labels" . | nindent 4 }}
+data:
+  config.yaml: |
+    environment: {{ .Values.config.environment | quote }}
+    backend_url: {{ .Values.config.backendURL | quote }}
+    tile_colors:
+      {{- range .Values.config.tileColors }}
+      - {{ . | quote }}
+      {{- end }}
+    log_config:
+      level: {{ .Values.config.logLevel | quote }}
+      format: {{ .Values.config.logFormat | quote }}
+      add_source: false
